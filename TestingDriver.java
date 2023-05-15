@@ -1,21 +1,22 @@
-import java.util.Map;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 public class TestingDriver
 {
     public static void main(String[] args)
     {   
         FileReader fileReader = new FileReader();
-        System.out.println(fileReader.getPath());
         fileReader.getTxtFiles(fileReader.getPath());
         fileReader.wordCountingMaps();
-        ArrayList<Map<String, Integer>> jeff = fileReader.getArr();
-        int length = jeff.size();
-        for(int i = 0; i<length; i++)
-        {
-            System.out.println(jeff.get(i).isEmpty());
+        fileReader.amassTexts();
+        fileReader.wordCounterMapper();
+        ArrayList<HashMap<String, Integer>> arr = fileReader.getArr();
+        for(int i = 0; i<fileReader.getFileCount(); i++){
+            System.out.println(arr.get(i).isEmpty());
+            HashMap<String, Integer> current = arr.get(i);
+            for (String j : current.keySet()) {
+                System.out.println("key: " + j + " value: " + current.get(j));
+              }
         }
-
     }
 }
