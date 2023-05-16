@@ -7,7 +7,6 @@ public class Testing
 
   public static void main(String[] args)
   {
-      System.out.println("Starting running the code");
 
       String text = "It is an important and popular fact that things are not always what they seem. It is well recognised that things are not always what they seem. as said 'this is a good test' in the book and they say 'this is a good test'"; //test
       String textB = "It is well recognised that things are not always what they seem. Spoken 'this is a good test'"; //test
@@ -85,6 +84,5 @@ public class Testing
       for (String p : phrases) {
         System.out.println(p);
       }
-      System.out.println("Finished running the code");
   }
 }

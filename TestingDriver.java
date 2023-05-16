@@ -18,5 +18,8 @@ public class TestingDriver
                 System.out.println("key: " + j + "; value: " + current.get(j));
               }
         }
+        String textB = "It is an important and popular fact that things are not always what they seem. It is well recognised that things are not always what they seem. as said 'this is a good test' in the book and they say 'this is a good test'"; //test
+        String textA = "It is well recognised that things are not always what they seem. Spoken 'this is a good test'"; //test
+        fileReader.phraseMatcher(3, textA, textB);
     }
 }

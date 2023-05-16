@@ -105,4 +105,88 @@ public class FileReader {
         }
     }
 
+    void phraseMatcher(int phraseMinWordCount, String textA, String textB){
+        int currentIndex = 0;
+        int endIndex = 0;
+        int phraseWordCount = 0;
+        String splitText;
+        String smallText;
+        if (textA.length() > textB.length()){
+            splitText = textA;
+            smallText = textB;
+        }
+        else{
+            splitText = textB;
+            smallText = textA;
+        }
+        String[] words = splitText.split("\\s+");
+        String phrase = "";
+        ArrayList<String> phrases = new ArrayList<String>();
+        Boolean match = false;
+        while (currentIndex < words.length)
+        {
+            String currentWord = words[currentIndex];
+
+            if (currentWord.startsWith("'") || currentWord.startsWith("\"")) {
+            int startOfQuoteIndex = currentWord.length() + endIndex;
+            int endOfSingleQuoteIndex = splitText.indexOf("'", startOfQuoteIndex);
+            int endOfDoubleQuoteIndex = splitText.indexOf("\"", startOfQuoteIndex);
+
+            // check for closing quotes and skip no. of words
+            if (endOfSingleQuoteIndex > -1) {
+                currentIndex += splitText.substring(endIndex, endOfSingleQuoteIndex).split("\\s+").length;
+            }
+            if (endOfDoubleQuoteIndex > -1) {
+                currentIndex += splitText.substring(endIndex, endOfDoubleQuoteIndex).split("\\s+").length;
+            }
+            continue;
+            }
+
+            // set starting point for phrase matching  
+            if (phraseWordCount < phraseMinWordCount) {
+            phrase += currentWord + " ";
+            endIndex += currentWord.length() + 1;
+            phraseWordCount++;
+            currentIndex++;
+            continue;
+            }
+            
+            // once we have a min length phrase, we can start matching
+            // find the current phrase in the following content.
+            int foundphraseMatchIndex = smallText.indexOf(phrase);
+
+            if (foundphraseMatchIndex > -1) {
+            // if we find a match, we expand the phrase
+            phrase += currentWord + " ";
+            endIndex += currentWord.length() + 1;
+            phraseWordCount++;
+            currentIndex++;
+            match = true;
+
+            // If its the end of the sentence then reset the phrase search
+            if (currentWord.endsWith(".")) {
+                phrases.add(phrase);        
+                match = false;
+                phrase = "";
+                phraseWordCount = 0;
+            }
+
+            continue;
+            }
+            
+            if (match) {
+            phrases.add(phrase);
+            }
+
+            // move to next phrase
+            phrase = phrase.substring(phrase.indexOf(" ") + 1);
+            phraseWordCount--;
+            match = false;
+        }
+
+        for (String p : phrases) {
+            System.out.println(p);
+        }
+    }
+    
 }
