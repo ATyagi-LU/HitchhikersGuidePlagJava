@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.math.*;
 
 public class FileReader {
     private int fileCount;
@@ -13,6 +14,7 @@ public class FileReader {
     private ArrayList<HashMap<String, Integer>> arr = new ArrayList<HashMap<String, Integer>>();
     private ArrayList<String[]> splitTexts = new ArrayList<String[]>();
     private ArrayList<String> texts = new ArrayList<String>();
+    private int phraseMinWordCount;
     
 
     String getPath() {
@@ -105,7 +107,31 @@ public class FileReader {
         }
     }
 
-    void phraseMatcher(int phraseMinWordCount, String textA, String textB){
+    public void setPhraseMinWordCount() {
+        boolean valid = false;
+        while(!valid){
+            try{
+                Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+                System.out.println("Please input min word count:");
+                this.phraseMinWordCount = Integer.parseInt(myObj.nextLine());
+                if(phraseMinWordCount==0)
+                {   
+                    System.out.println("Not a valid input, please try again.");
+                    valid = false;
+                    continue;
+                }
+                myObj.close();
+                valid = true;
+            }
+            catch(Exception e){
+                System.out.println("Not a valid input, please try again.");
+            }
+        }
+        
+    }
+
+    void phraseMatcher(String textA, String textB){
+        setPhraseMinWordCount();
         int currentIndex = 0;
         int endIndex = 0;
         int phraseWordCount = 0;
@@ -184,6 +210,7 @@ public class FileReader {
             match = false;
         }
 
+        System.out.println("Matches:");
         for (String p : phrases) {
             System.out.println(p);
         }
