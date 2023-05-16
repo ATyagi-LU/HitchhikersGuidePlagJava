@@ -11,7 +11,9 @@ public class FileReader {
     private int fileCount;
     private String[] files;
     private ArrayList<HashMap<String, Integer>> arr = new ArrayList<HashMap<String, Integer>>();
-    private ArrayList<String[]> texts = new ArrayList<String[]>();
+    private ArrayList<String[]> splitTexts = new ArrayList<String[]>();
+    private ArrayList<String> texts = new ArrayList<String>();
+    
 
     String getPath() {
 
@@ -70,6 +72,7 @@ public class FileReader {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        texts.add(text);
         String[] words = text.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
         return words;
     }
@@ -77,18 +80,18 @@ public class FileReader {
     void amassTexts() {
         for (int i = 0; i < getFileCount(); i++) {
             String[] text = fileRead(files[i]);
-            texts.add(text);
+            splitTexts.add(text);
         }
     }
 
     public ArrayList<String[]> getTexts() {
-        return texts;
+        return splitTexts;
     }
 
     void wordCounterMapper() {
         for (int i = 0; i < fileCount; i++) {
             HashMap<String, Integer> currentHashMap = arr.get(i);
-            String[] currentText = texts.get(i);
+            String[] currentText = splitTexts.get(i);
             for(String word : currentText){
                 boolean exists = currentHashMap.containsKey(word);
                 if (exists){

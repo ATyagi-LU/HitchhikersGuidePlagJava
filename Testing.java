@@ -10,18 +10,17 @@ public class Testing
       System.out.println("Starting running the code");
 
       String text = "It is an important and popular fact that things are not always what they seem. It is well recognised that things are not always what they seem. as said 'this is a good test' in the book and they say 'this is a good test'";
-
+      String textB = "It is well recognised that things are not always what they seem. Spoken 'this is a good test'";
       int currentIndex = 0;
       int endIndex = 0;
-  
-      int phaseWordCount = 0;
-      int phaseMinWordCount = 3;
+
+      int phraseWordCount = 0;
+      int phraseMinWordCount = 3;
 
       String[] words = text.split("\\s+");
-      String phase = "";
-      ArrayList<String> phases = new ArrayList<String>();
+      String phrase = "";
+      ArrayList<String> phrases = new ArrayList<String>();
       Boolean match = false;
-
       while (currentIndex < words.length)
       {
         String currentWord = words[currentIndex];
@@ -41,49 +40,49 @@ public class Testing
           continue;
         }
 
-        // set starting point for phase matching
-        if (phaseWordCount < phaseMinWordCount) {
-          phase += currentWord + " ";
+        // set starting point for phrase matching  
+        if (phraseWordCount < phraseMinWordCount) {
+          phrase += currentWord + " ";
           endIndex += currentWord.length() + 1;
-          phaseWordCount++;
+          phraseWordCount++;
           currentIndex++;
           continue;
         }
         
-        // once we have a min length phase, we can start matching
-        // find the current phase in the following content.
-        int foundPhaseMatchIndex = text.indexOf(phase, endIndex);
+        // once we have a min length phrase, we can start matching
+        // find the current phrase in the following content.
+        int foundphraseMatchIndex = textB.indexOf(phrase);
 
-        if (foundPhaseMatchIndex > -1) {
-          // if we find a match, we expand the phase
-          phase += currentWord + " ";
+        if (foundphraseMatchIndex > -1) {
+          // if we find a match, we expand the phrase
+          phrase += currentWord + " ";
           endIndex += currentWord.length() + 1;
-          phaseWordCount++;
+          phraseWordCount++;
           currentIndex++;
           match = true;
 
-          // If its  end of the sentence then reset the phase search
+          // If its the end of the sentence then reset the phrase search
           if (currentWord.endsWith(".")) {
-            phases.add(phase);        
+            phrases.add(phrase);        
             match = false;
-            phase = "";
-            phaseWordCount = 0;
+            phrase = "";
+            phraseWordCount = 0;
           }
 
           continue;
         }
         
         if (match) {
-          phases.add(phase);
+          phrases.add(phrase);
         }
 
-        // move to next phase
-        phase = phase.substring(phase.indexOf(" ") + 1);
-        phaseWordCount--;
+        // move to next phrase
+        phrase = phrase.substring(phrase.indexOf(" ") + 1);
+        phraseWordCount--;
         match = false;
       }
 
-      for (String p : phases) {
+      for (String p : phrases) {
         System.out.println(p);
       }
       System.out.println("Finished running the code");

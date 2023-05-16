@@ -15,7 +15,7 @@ public class TestingDriver
             System.out.println(arr.get(i).isEmpty());
             HashMap<String, Integer> current = arr.get(i);
             for (String j : current.keySet()) {
-                System.out.println("key: " + j + " value: " + current.get(j));
+                System.out.println("key: " + j + "; value: " + current.get(j));
               }
         }
     }
