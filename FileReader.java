@@ -223,4 +223,14 @@ public class FileReader {
         return matchPercent;
     }
     
+    void arrPrinter(){
+        for(int i = 0; i<getFileCount(); i++){
+            System.out.println(files[i]);
+            HashMap<String, Integer> current = arr.get(i);
+            for (String j : current.keySet()) {
+                System.out.println("key: " + j + "; value: " + current.get(j));
+              }
+        }
+    }
+
 }
