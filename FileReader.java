@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.math.*;
 
 public class FileReader {
     private int fileCount;
@@ -130,7 +129,7 @@ public class FileReader {
         
     }
 
-    void phraseMatcher(String textA, String textB){
+    double phraseMatcher(String textA, String textB){
         setPhraseMinWordCount();
         int currentIndex = 0;
         int endIndex = 0;
@@ -191,7 +190,7 @@ public class FileReader {
 
             // If its the end of the sentence then reset the phrase search
             if (currentWord.endsWith(".")) {
-                phrases.add(phrase);        
+                phrases.add(phrase.replaceAll("\\.(?=\\s|$)", ""));        
                 match = false;
                 phrase = "";
                 phraseWordCount = 0;
@@ -214,6 +213,16 @@ public class FileReader {
         for (String p : phrases) {
             System.out.println(p);
         }
+        String matches = "";
+        for (int i = 0; i<phrases.size();i++){
+            matches += phrases.get(i) + " ";
+        }
+        String[] matchesLength = matches.split("\\s+");
+        int matchNum = matchesLength.length;
+        System.out.println(matchNum);
+        System.out.println(splitText.split("\\s+").length);
+        double matchPercent = Math.round((((double)matchNum)/((double)splitText.split("\\s+").length))*100.0);
+        return matchPercent;
     }
     
 }
