@@ -219,8 +219,6 @@ public class FileReader {
         }
         String[] matchesLength = matches.split("\\s+");
         int matchNum = matchesLength.length;
-        System.out.println(matchNum);
-        System.out.println(splitText.split("\\s+").length);
         double matchPercent = Math.round((((double)matchNum)/((double)splitText.split("\\s+").length))*100.0);
         return matchPercent;
     }
