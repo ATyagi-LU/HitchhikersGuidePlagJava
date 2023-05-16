@@ -9,8 +9,8 @@ public class Testing
   {
       System.out.println("Starting running the code");
 
-      String text = "It is an important and popular fact that things are not always what they seem. It is well recognised that things are not always what they seem. as said 'this is a good test' in the book and they say 'this is a good test'";
-      String textB = "It is well recognised that things are not always what they seem. Spoken 'this is a good test'";
+      String text = "It is an important and popular fact that things are not always what they seem. It is well recognised that things are not always what they seem. as said 'this is a good test' in the book and they say 'this is a good test'"; //test
+      String textB = "It is well recognised that things are not always what they seem. Spoken 'this is a good test'"; //test
       int currentIndex = 0;
       int endIndex = 0;
 
