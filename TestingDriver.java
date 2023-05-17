@@ -7,7 +7,6 @@ public class TestingDriver
         fileReader.wordCountingMaps();
         fileReader.amassTexts();
         fileReader.wordCounterMapper();
-        fileReader.wordCountingMapsPrinter();
         fileReader.filePair();
         fileReader.printFilePair();
         fileReader.setPhraseMinWordCount();
