@@ -41,9 +41,16 @@ public class FileReader {
     }
 
     void printMatchPercents(){
+        String highestPair = "";
+        double highestPairMatchPercent = 0;
         for (String j : matchPercents.keySet()) {
-            System.out.println("Pair: " + j + "; Percent match for File Pair: " + matchPercents.get(j));
+            System.out.println("Pair: " + j + "; Percent match for File Pair: " + matchPercents.get(j) +"%");
+            if (matchPercents.get(j)>highestPairMatchPercent){
+                highestPair = j;
+                highestPairMatchPercent = matchPercents.get(j);
+            }
         }
+        System.out.println("Highest match pair: " + highestPair + "; Percent match for File Pair: "+ highestPairMatchPercent+"%");
     }
 
     void filePair() {
@@ -91,9 +98,8 @@ public class FileReader {
         };
         files = f.list(filter);
 
-        for (String file : files) {
+        for (int i =0; i< files.length; i++) {
             fileCount++;
-            System.out.println(file);
         }
     }
 
@@ -169,7 +175,7 @@ public class FileReader {
                 Scanner myObj = new Scanner(System.in); // Create a Scanner object
                 System.out.println("Please input min word count:");
                 phraseMinWordCount = Integer.parseInt(myObj.nextLine());
-                if (phraseMinWordCount == 0) {
+                if (phraseMinWordCount == 0|| phraseMinWordCount == 1) {
                     System.out.println("Not a valid input, please try again.");
                     valid = false;
                     continue;
@@ -240,12 +246,12 @@ public class FileReader {
                 match = true;
 
                 // If its the end of the sentence then reset the phrase search
-                if (currentWord.endsWith(".")) {
+                /*if (currentWord.endsWith(".")) {
                     phrases.add(phrase.replaceAll("\\.(?=\\s|$)", ""));
                     match = false;
                     phrase = "";
                     phraseWordCount = 0;
-                }
+                }*/
 
                 continue;
             }
